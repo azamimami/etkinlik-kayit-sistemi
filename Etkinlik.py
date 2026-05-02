@@ -71,11 +71,11 @@ class EtkinlikSistemi:
         self.katilimcilar = []
         self.biletler = []
 
-    def etkinlik_ekle(self, etkinlik):
-        self.etkinlikler.append(etkinlik)
+    def etkinlik_ekle(self, e):
+        self.etkinlikler.append(e)
 
-    def katilimci_ekle(self, katilimci):
-        self.katilimcilar.append(katilimci)
+    def katilimci_ekle(self, k):
+        self.katilimcilar.append(k)
 
     def bilet_olustur(self, etkinlik, katilimci):
         sonuc = etkinlik.katilimci_ekle(katilimci)
@@ -85,9 +85,34 @@ class EtkinlikSistemi:
 
         bilet = Bilet(etkinlik, katilimci)
         self.biletler.append(bilet)
-
         return bilet
 
+    # ================= SİLME / İPTAL =================
+    def bilet_iptal(self, bilet_id):
+        for b in self.biletler:
+            if b.bilet_id == bilet_id:
+                if b.katilimci in b.etkinlik.katilimcilar:
+                    b.etkinlik.katilimcilar.remove(b.katilimci)
+
+                self.biletler.remove(b)
+                return "Bilet iptal edildi"
+        return "Bilet bulunamadı"
+
+    def etkinlik_sil(self, etkinlik_id):
+        for e in self.etkinlikler:
+            if e.etkinlik_id == etkinlik_id:
+                self.etkinlikler.remove(e)
+                return "Etkinlik silindi"
+        return "Etkinlik bulunamadı"
+
+    def katilimci_sil(self, katilimci_id):
+        for k in self.katilimcilar:
+            if k.katilimci_id == katilimci_id:
+                self.katilimcilar.remove(k)
+                return "Katılımcı silindi"
+        return "Katılımcı bulunamadı"
+
+    # ================= RAPOR =================
     def rapor(self):
         print("\n--- ETKİNLİK RAPORU ---")
         for e in self.etkinlikler:
@@ -105,20 +130,19 @@ def menu():
         print("3- Etkinlik Listele")
         print("4- Katılımcı Listele")
         print("5- Bilet Oluştur")
-        print("6- Rapor")
-        print("7- Çıkış")
+        print("6- Bilet İptal")
+        print("7- Rapor")
+        print("8- Çıkış")
 
         secim = input("Seçim: ")
 
         # ---------- ETKİNLİK ----------
         if secim == "1":
             ad = input("Etkinlik adı: ")
-            tarih = input("Tarih (YYYY-AA-GG): ")
+            tarih = input("Tarih: ")
             kapasite = int(input("Kapasite: "))
 
-            e = Etkinlik(ad, tarih, kapasite)
-            sistem.etkinlik_ekle(e)
-
+            sistem.etkinlik_ekle(Etkinlik(ad, tarih, kapasite))
             print("Etkinlik eklendi")
 
         # ---------- KATILIMCI ----------
@@ -126,9 +150,7 @@ def menu():
             ad = input("Ad: ")
             email = input("Email: ")
 
-            k = Katilimci(ad, email)
-            sistem.katilimci_ekle(k)
-
+            sistem.katilimci_ekle(Katilimci(ad, email))
             print("Katılımcı eklendi")
 
         # ---------- LIST ETKİNLİK ----------
@@ -155,18 +177,29 @@ def menu():
 
             kid = int(input("Katılımcı ID: "))
 
-            etkinlik = next(e for e in sistem.etkinlikler if e.etkinlik_id == eid)
-            katilimci = next(k for k in sistem.katilimcilar if k.katilimci_id == kid)
+            e = next(x for x in sistem.etkinlikler if x.etkinlik_id == eid)
+            k = next(x for x in sistem.katilimcilar if x.katilimci_id == kid)
 
-            sonuc = sistem.bilet_olustur(etkinlik, katilimci)
-            print(sonuc)
+            print(sistem.bilet_olustur(e, k))
+
+        # ---------- BİLET İPTAL ----------
+        elif secim == "6":
+            if not sistem.biletler:
+                print("Bilet yok.")
+            else:
+                print("\n--- BİLETLER ---")
+                for b in sistem.biletler:
+                    print(b)
+
+                bid = int(input("Bilet ID: "))
+                print(sistem.bilet_iptal(bid))
 
         # ---------- RAPOR ----------
-        elif secim == "6":
+        elif secim == "7":
             sistem.rapor()
 
         # ---------- EXIT ----------
-        elif secim == "7":
+        elif secim == "8":
             print("Çıkış yapıldı")
             break
 
