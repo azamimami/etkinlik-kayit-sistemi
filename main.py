@@ -51,11 +51,10 @@ class Uye:
         return odunc
 
     def kitap_iade_et(self, kitap, sistem):
-        kitap.kitap_durumu_degistir("Müsait")
-
         for o in sistem.oduncler:
             if o.kitap == kitap and o.iade_tarihi is None:
                 o.iade_tarihi = datetime.now()
+                kitap.kitap_durumu_degistir("Müsait")
                 return "Kitap iade edildi."
 
         return "Ödünç kaydı bulunamadı."
@@ -78,8 +77,10 @@ class Odunc:
         self.iade_tarihi = None
 
     def __str__(self):
-        iade = self.iade_tarihi.strftime("%Y-%m-%d") if self.iade_tarihi else "Henüz iade edilmedi"
-        return f"[{self.odunc_id}] {self.kitap.ad} -> {self.uye.ad} | {iade}"
+        odunc = self.odunc_tarihi.strftime("%Y-%m-%d %H:%M")
+        iade = self.iade_tarihi.strftime("%Y-%m-%d %H:%M") if self.iade_tarihi else "Henüz iade edilmedi"
+
+        return f"[{self.odunc_id}] {self.kitap.ad} -> {self.uye.ad} | Ödünç: {odunc} | İade: {iade}"
 
 
 # ================= SİSTEM =================
@@ -174,9 +175,7 @@ def menu():
             print(sonuc)
 
         # ---------- IADE ----------
-                # ---------- IADE ----------
         elif secim == "6":
-            # sadece aktif ödünçler gösterilir
             aktif_oduncler = [o for o in sistem.oduncler if o.iade_tarihi is None]
 
             if not aktif_oduncler:
@@ -187,7 +186,7 @@ def menu():
             for o in aktif_oduncler:
                 print(f"Odunc ID: {o.odunc_id} | Kitap: {o.kitap.ad} | Üye: {o.uye.ad}")
 
-            oid = int(input("\nİade edilecek Odunc ID: "))
+            oid = int(input("İade edilecek Odunc ID: "))
 
             odunc = next((o for o in sistem.oduncler if o.odunc_id == oid), None)
 
@@ -197,7 +196,6 @@ def menu():
                 odunc.iade_tarihi = datetime.now()
                 odunc.kitap.kitap_durumu_degistir("Müsait")
                 print("Kitap başarıyla iade edildi")
-
 
         # ---------- ODUNC LIST ----------
         elif secim == "7":
