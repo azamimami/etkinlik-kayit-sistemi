@@ -174,21 +174,41 @@ def menu():
             print(sonuc)
 
         # ---------- IADE ----------
+                # ---------- IADE ----------
         elif secim == "6":
-            kid = int(input("Kitap ID: "))
+            # sadece aktif ödünçler gösterilir
+            aktif_oduncler = [o for o in sistem.oduncler if o.iade_tarihi is None]
 
-            kitap = next(k for k in sistem.kitaplar if k.kitap_id == kid)
-            uye = sistem.uyeler[0] if sistem.uyeler else None
+            if not aktif_oduncler:
+                print("İade edilecek kitap yok.")
+                continue
 
-            if uye:
-                print(uye.kitap_iade_et(kitap, sistem))
+            print("\n--- ÖDÜNÇTEKİ KİTAPLAR ---")
+            for o in aktif_oduncler:
+                print(f"Odunc ID: {o.odunc_id} | Kitap: {o.kitap.ad} | Üye: {o.uye.ad}")
+
+            oid = int(input("\nİade edilecek Odunc ID: "))
+
+            odunc = next((o for o in sistem.oduncler if o.odunc_id == oid), None)
+
+            if odunc is None or odunc.iade_tarihi is not None:
+                print("Geçersiz ödünç ID")
             else:
-                print("Üye yok")
+                odunc.iade_tarihi = datetime.now()
+                odunc.kitap.kitap_durumu_degistir("Müsait")
+                print("Kitap başarıyla iade edildi")
+
 
         # ---------- ODUNC LIST ----------
         elif secim == "7":
-            for o in sistem.odunc_listesi():
-                print(o)
+            oduncler = sistem.odunc_listesi()
+
+            if len(oduncler) == 0:
+                print("Henüz hiç ödünç kayıtı yok.")
+            else:
+                print("\n--- ÖDÜNÇ LİSTESİ ---")
+                for o in oduncler:
+                    print(o)
 
         # ---------- EXIT ----------
         elif secim == "8":
