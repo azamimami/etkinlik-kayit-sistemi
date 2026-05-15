@@ -12,7 +12,7 @@ Profesyonel ve kullanıcı dostu bir Etkinlik Yönetim Sistemi. PyQt5 ve Matplot
 - **❌ İptal Bilet Sayısı** - İptal edilen bilet sayısı
 - Gerçek zamanlı güncelleme (5 saniyede bir)
 
-<img width="1440" height="900" alt="Screenshot 2026-05-15 at 20 08 14" src="https://github.com/user-attachments/assets/5e5821c0-bce5-4f6d-8e02-fac5064eb2c8" />
+<img width="1440" height="900" alt="Screenshot 2026-05-15 at 20 38 02" src="https://github.com/user-attachments/assets/0835638b-f5bf-407c-a0c5-003bd745afe4" />
 
 # 🎪 Etkinlik Yönetimi
 - ➕ **Etkinlik Ekle** - Ad, Kategori, Tarih, Yer, Kapasite ile etkinlik oluşturma
@@ -28,7 +28,8 @@ Profesyonel ve kullanıcı dostu bir Etkinlik Yönetim Sistemi. PyQt5 ve Matplot
 - 📋 **Detaylı Liste** - Tüm katılımcı bilgileri
 - 🔄 **Yenile** - Katılımcı listesini güncelleme
 
-<img width="1440" height="900" alt="Screenshot 2026-05-15 at 20 08 21" src="https://github.com/user-attachments/assets/80aa5437-6281-4c8f-9edc-7bd62c8a8a5e" />
+<img width="1440" height="900" alt="Screenshot 2026-05-15 at 20 38 22" src="https://github.com/user-attachments/assets/4625e1ab-9a8f-418f-b043-276ae50077b1" />
+
 
 
 
@@ -40,7 +41,9 @@ Profesyonel ve kullanıcı dostu bir Etkinlik Yönetim Sistemi. PyQt5 ve Matplot
 - 🎨 **Durum Göstergesi** - Aktif (Yeşil) / İptal (Kırmızı)
 - 🔄 **Yenile** - Bilet listesini güncelleme
 
-<img width="1440" height="900" alt="Screenshot 2026-05-15 at 20 08 30" src="https://github.com/user-attachments/assets/0df44dc2-b891-4790-877c-6dbf8cc92f90" />
+
+<img width="1440" height="900" alt="Screenshot 2026-05-15 at 20 38 37" src="https://github.com/user-attachments/assets/749261a2-c7a3-4e26-8a36-5d4dd2c670af" />
+
 
 
 
@@ -49,8 +52,9 @@ Profesyonel ve kullanıcı dostu bir Etkinlik Yönetim Sistemi. PyQt5 ve Matplot
 - 🥧 **Pasta Grafik** - Aktif/İptal bilet durumu
 - 🎨 **Koyu Tema** - Profesyonel ve modern görünüm
 - 📈 **Otomatik Güncelleme** - Veri değişikliklerinde yenileme
+<img width="1440" height="900" alt="Screenshot 2026-05-15 at 20 38 46" src="https://github.com/user-attachments/assets/c7e7ab40-3467-4b7e-a9f0-d9c71a1f5b1d" />
 
-<img width="1440" height="900" alt="Statistik" src="https://github.com/user-attachments/assets/a98a7838-5d84-495f-8ebb-41add5fcce77" />
+
 
 
 
